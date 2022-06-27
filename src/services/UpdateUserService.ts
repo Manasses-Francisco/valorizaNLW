@@ -37,6 +37,7 @@ class UpdateUserService {
         return state=true;
       })
       .catch((error) => {
+        console.log(error);
         return state=false;
       });
 

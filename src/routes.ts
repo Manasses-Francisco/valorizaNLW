@@ -14,6 +14,7 @@ import { ListUserSendComplimentsController } from "./controllers/ListUserSendCom
 import { ListTagsController } from "./controllers/ListTagsController";
 import { ListUsersController } from "./controllers/ListUsersController";
 import { UpdateUserController } from "./controllers/UpdateUserController";
+import { UpdateUserForAdminController } from "./controllers/UpdateUserForAdminController";
 
 const router=Router();
 
@@ -26,6 +27,8 @@ const listUserSendComplimentsController = new ListUserSendComplimentsController(
 const listTagsController = new ListTagsController();
 const listUsersController = new ListUsersController();
 const updateUserController = new UpdateUserController();
+const updateUserForAdminController = new UpdateUserForAdminController();
+
 
 router.post("/users",userCreateValidator,createUserController.handle);
 router.post("/tags",createTagValidator,ensureAuthenticate,ensureAdmin,createTagController.handle);
@@ -36,6 +39,7 @@ router.get("/users/compliments/send",ensureAuthenticate,listUserSendComplimentsC
 router.get("/users/compliments/receive",ensureAuthenticate,listUserReceiveComplimentsController.handle);
 router.get("/users",ensureAdmin,listUsersController.handle);
 router.put("/users/update",updateUserValidator,ensureAuthenticate,updateUserController.handle);
+router.put("/users/admin/update",ensureAuthenticate,ensureAdmin,updateUserForAdminController.handle);
 
 
 export {router};
